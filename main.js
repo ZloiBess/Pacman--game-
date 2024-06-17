@@ -34,7 +34,7 @@ const SPEED_GHOST_MS = 600;
     });
     drawField(); //
     startProcess(); //
-    // setInterval(() => _TEST_showMap(), 200);
+    setInterval(() => _TEST_showMap(), 200);
 }
 //_______________________________________________/Init//.
 
@@ -293,7 +293,7 @@ function gameOver() {
             resultElem.innerHTML = '~YOU LOSE~ <br>  Press  Enter';
             resultElem.classList.add('result-lose');
         } else {
-            resultElem.style.backgroundColor = 'rgba(80, 255, 0, 0.5)';
+            resultElem.innerHTML = '~YOU WIN~ <br>  Press  Enter';
             resultElem.classList.add('result-win');
         }
 
