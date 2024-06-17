@@ -1,6 +1,7 @@
 import Maps from '/entity/Maps.js';
 import Pacman from '/entity/Pacman.js';
 import Ghost from '/entity/Ghost.js';
+console.log('main!');
 
 //_________________________________/Elements page.
 const playingField = document.querySelector('.playing-field');
