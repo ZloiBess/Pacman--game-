@@ -1,0 +1,186 @@
+@import url(reset.css);
+
+#root {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.playing-field {
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+    background-color: rgb(0, 0, 0);
+    display: grid;
+    overflow: hidden;
+}
+
+.info {
+    width: min(100vw, 100vh);
+    height: 50px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hearts {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart {
+    width: 45px;
+    height: 45px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hearts img {
+    max-width: 100%;
+    object-fit: contain;
+}
+.score {
+    color: #ffffff;
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.rect-wall {
+    background-color: rgb(0, 15, 120);
+}
+
+.rect-passege {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    position: relative;
+}
+
+.food {
+    width: 25%;
+    height: 25%;
+    background-color: rgb(248, 154, 3);
+    box-shadow: 0px 0px 10px 2px rgb(255, 0, 0);
+}
+
+.ghost {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250, 216, 152, 0.9);
+    position: absolute;
+    border-radius: 50% 50% 0 0;
+    transition: left 0.6s linear, top 0.6s linear;
+    /* box-shadow: inset 0px 0px 10px 2px rgb(255, 0, 0); */
+    box-shadow: 0px 0px 10px 2px rgb(255, 0, 0);
+}
+
+.ghost::after {
+    display: block;
+    content: '';
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 25%;
+    left: 60%;
+}
+
+.ghost::before {
+    display: block;
+    content: '';
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 25%;
+    left: 15%;
+}
+
+.pacman {
+    position: absolute;
+    z-index: 100;
+    width: 90%;
+    height: 90%;
+    background-color: rgb(251, 134, 8);
+    border-radius: 50%;
+    transition: left 0.3s linear, top 0.3s linear;
+}
+
+.pacman-mouth {
+    position: absolute;
+    z-index: 100;
+    width: 90%;
+    height: 90%;
+    background-color: black;
+    animation: eat 1s linear infinite;
+}
+
+.right {
+    transform: rotate(180deg);
+}
+
+.up {
+    transform: rotate(90deg);
+}
+
+.down {
+    transform: rotate(270deg);
+}
+
+.left {
+    transform: rotate(0deg);
+}
+
+.result {
+    width: 0;
+    height: min(25vw, 25vh);
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.2s linear;
+    font-size: 300%;
+    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+    user-select: none;
+    text-align: center;
+}
+
+.result-win {
+    width: min(50vw, 50vh);
+    background-color: rgba(80, 255, 0, 0.5);
+    box-shadow: 0px 0px 50px 10px rgba(80, 255, 0, 0.5);
+}
+
+.result-lose {
+    width: min(50vw, 50vh);
+    background-color: rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 50px 10px rgba(255, 0, 0, 0.5);
+}
+
+@keyframes eat {
+    0%,
+    100% {
+        clip-path: polygon(45% 50%, 0% 0%, 0% 100%);
+    }
+    50% {
+        clip-path: polygon(75% 50%, 0% 35%, 0% 45%);
+    }
+}
