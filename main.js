@@ -10,8 +10,8 @@ let pacmanElement;
 let ghostsElements = [];
 let rectElement;
 //_________________________________/Objects.
-const RANGE_RADAR_GHOST_Y = 16;
-const RANGE_RADAR_GHOST_X = 16;
+const RANGE_RADAR_GHOST_Y = 23;
+const RANGE_RADAR_GHOST_X = 23;
 let MAP_ARR = Maps.defaultMap();
 const PACMAN_OBJ = new Pacman(MAP_ARR);
 const GHOST6 = new Ghost(MAP_ARR, 6, RANGE_RADAR_GHOST_Y, RANGE_RADAR_GHOST_X);
@@ -24,17 +24,17 @@ let intervalIndexPacman = null;
 let intervalIndexGhosts = null;
 let inputKey = null;
 let countLessHearts = PACMAN_OBJ.hearts;
-const SPEED_PAKMAN_MS = 300;
-const SPEED_GHOST_MS = 600;
+const SPEED_PAKMAN_MS = 200;
+const SPEED_GHOST_MS = 300;
 
 // _______________________________________________________
 {
     document.addEventListener('keydown', (event) => {
         inputKey = event.key;
     });
-    drawField(); //
-    startProcess(); //
-    setInterval(() => _TEST_showMap(), 200);
+    drawField();
+    startProcess();
+    // setInterval(() => _TEST_showMap(), 200);
 }
 //_______________________________________________/Init//.
 
@@ -47,11 +47,13 @@ function startProcess() {
     }, SPEED_PAKMAN_MS);
 
     intervalIndexGhosts = setInterval(() => {
-        for (let i = 0; i < GHOSTS_ARR.length; i++) {
-            let currGhost = GHOSTS_ARR[i];
-            if (currGhost.getCoordinatePacmanInTheRange()) {
-                currGhost.stepToPacman();
-                drawShiftGhost(i);
+        if (inputKey !== null) {
+            for (let i = 0; i < GHOSTS_ARR.length; i++) {
+                let currGhost = GHOSTS_ARR[i];
+                if (currGhost.getCoordinatePacmanInTheRange()) {
+                    currGhost.stepToPacman();
+                    drawShiftGhost(i);
+                }
             }
         }
     }, SPEED_GHOST_MS);
@@ -199,15 +201,21 @@ function drawElements(marker) {
         pacmanElement = pacman;
         pacmanElement.style.left = 0;
         pacmanElement.style.top = 0;
+        pacmanElement.style.transition = `left ${
+            SPEED_PAKMAN_MS / 1000
+        }s  linear, top ${SPEED_PAKMAN_MS / 1000}s linear`;
     }
 
     if (marker > 5) {
-        const ghost = document.createElement('div');
-        ghost.classList.add('ghost');
-        rectElement.appendChild(ghost);
-        ghostsElements.push(ghost);
-        ghost.style.left = 0;
-        ghost.style.top = 0;
+        const ghostElement = document.createElement('div');
+        ghostElement.classList.add('ghost');
+        rectElement.appendChild(ghostElement);
+        ghostsElements.push(ghostElement);
+        ghostElement.style.left = 0;
+        ghostElement.style.top = 0;
+        ghostElement.style.transition = `left ${
+            SPEED_GHOST_MS / 1000
+        }s  linear, top ${SPEED_GHOST_MS / 1000}s linear`;
     }
 
     playingField.appendChild(rectElement);

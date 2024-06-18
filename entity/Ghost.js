@@ -8,6 +8,10 @@ export default class Ghost {
         this.rangeRadarX = rangeRadarX;
         this.looksDirection = null;
         this.nextMarker = null;
+        this.checkStepLeft = true;
+        this.checkStepRight = true;
+        this.checkStepUp = true;
+        this.checkStepDown = true;
         this.currMarker = 2;
     }
 
@@ -36,63 +40,63 @@ export default class Ghost {
             let directionChaseY =
                 distanceY === 0 ? 'stop' : distanceY > 0 ? 'up' : 'down';
             let directionChaseX =
-                distanceX === 0 ? 'stop' : distanceX > 0 ? 'Left' : 'Right';
+                distanceX === 0 ? 'Stop' : distanceX > 0 ? 'Left' : 'Right';
             let directionMove = directionChaseY + directionChaseX;
 
             if (directionMove.includes('upLeft')) {
-                if (this.stepUp()) return true;
-                if (this.stepLeft()) return true;
-                if (this.stepDown()) return true;
-                if (this.stepRight()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
             }
 
             if (directionMove.includes('upRight')) {
-                if (this.stepUp()) return true;
-                if (this.stepRight()) return true;
-                if (this.stepDown()) return true;
-                if (this.stepLeft()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
             }
 
             if (directionMove.includes('stopLeft')) {
-                if (this.stepLeft()) return true;
-                if (this.stepUp()) return true;
-                if (this.stepDown()) return true;
-                if (this.stepRight()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
             }
 
             if (directionMove.includes('stopRight')) {
-                if (this.stepRight()) return true;
-                if (this.stepUp()) return true;
-                if (this.stepDown()) return true;
-                if (this.stepLeft()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
             }
 
-            if (directionMove.includes('upstop')) {
-                if (this.stepUp()) return true;
-                if (this.stepLeft()) return true;
-                if (this.stepRight()) return true;
-                if (this.stepDown()) return true;
+            if (directionMove.includes('upStop')) {
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
             }
 
-            if (directionMove.includes('downstop')) {
-                if (this.stepDown()) return true;
-                if (this.stepUp()) return true;
-                if (this.stepLeft()) return true;
-                if (this.stepRight()) return true;
+            if (directionMove.includes('downStop')) {
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
             }
 
             if (directionMove.includes('downLeft')) {
-                if (this.stepDown()) return true;
-                if (this.stepLeft()) return true;
-                if (this.stepUp()) return true;
-                if (this.stepRight()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
             }
 
             if (directionMove.includes('downRight')) {
-                if (this.stepDown()) return true;
-                if (this.stepRight()) return true;
-                if (this.stepUp()) return true;
-                if (this.stepLeft()) return true;
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
             }
         }
 
@@ -109,8 +113,15 @@ export default class Ghost {
             this.y = this.y - 1;
             this.map[this.y][this.x] = this.number;
             this.looksDirection = 'up';
+            this.checkStepLeft = true;
+            this.checkStepRight = true;
+            this.checkStepUp = true;
+            this.checkStepDown = false;
             return true;
         }
+        this.checkStepUp = false;
+        this.checkStepDown = true;
+
         return false;
     }
 
@@ -123,8 +134,14 @@ export default class Ghost {
             this.y = this.y + 1;
             this.map[this.y][this.x] = this.number;
             this.looksDirection = 'down';
+            this.checkStepLeft = true;
+            this.checkStepRight = true;
+            this.checkStepDown = true;
+            this.checkStepUp = false;
             return true;
         }
+        this.checkStepDown = false;
+        this.checkStepUp = true;
         return false;
     }
 
@@ -137,8 +154,14 @@ export default class Ghost {
             this.x = this.x - 1;
             this.map[this.y][this.x] = this.number;
             this.looksDirection = 'left';
+            this.checkStepDown = true;
+            this.checkStepUp = true;
+            this.checkStepLeft = true;
+            this.checkStepRight = false;
             return true;
         }
+        this.checkStepLeft = false;
+        this.checkStepRight = true;
         return false;
     }
 
@@ -151,8 +174,14 @@ export default class Ghost {
             this.x = this.x + 1;
             this.map[this.y][this.x] = this.number;
             this.looksDirection = 'right';
+            this.checkStepDown = true;
+            this.checkStepUp = true;
+            this.checkStepRight = true;
+            this.checkStepLeft = false;
             return true;
         }
+        this.checkStepRight = false;
+        this.checkStepLeft = true;
         return false;
     }
 
