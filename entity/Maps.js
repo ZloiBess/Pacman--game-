@@ -1,4 +1,4 @@
-// 0 -empty 1-wall 2-food 3-pacman 5-teleport 6,7,8...-ghosts
+// 0 -empty 1-wall 2-food 3-pacman 6,7,8...-ghosts
 
 export default class Maps {
     static defaultMap() {

@@ -1,4 +1,3 @@
-console.log('main!');
 import Maps from './entity/Maps.js';
 import Pacman from './entity/Pacman.js';
 import Ghost from './entity/Ghost.js';
@@ -10,8 +9,8 @@ let pacmanElement;
 let ghostsElements = [];
 let rectElement;
 //_________________________________/Objects.
-const RANGE_RADAR_GHOST_Y = 23;
-const RANGE_RADAR_GHOST_X = 23;
+const RANGE_RADAR_GHOST_Y = 33;
+const RANGE_RADAR_GHOST_X = 33;
 let MAP_ARR = Maps.defaultMap();
 const PACMAN_OBJ = new Pacman(MAP_ARR);
 const GHOST6 = new Ghost(MAP_ARR, 6, RANGE_RADAR_GHOST_Y, RANGE_RADAR_GHOST_X);
@@ -34,7 +33,7 @@ const SPEED_GHOST_MS = 300;
     });
     drawField();
     startProcess();
-    setInterval(() => _TEST_showMap(), 200);
+    setInterval(() => _TEST_showConsoleMap(), 200);
 }
 //_______________________________________________/Init//.
 
@@ -335,7 +334,7 @@ function gameOver() {
     }
 }
 
-function _TEST_showMap() {
+function _TEST_showConsoleMap() {
     console.clear();
     let arrRow = '';
     for (let row = 0; row < MAP_ARR.length; row++) {

@@ -106,7 +106,20 @@ export default class Ghost {
 
     stepUp() {
         let stepUp = this.map[this.y - 1][this.x];
-        if (stepUp >= 5) return false;
+        if (stepUp == undefined) {
+            this.checkStepUp = false;
+            this.checkStepDown = true;
+            return false;
+        }
+
+        if (stepUp > 5) {
+            this.checkStepLeft = true;
+            this.checkStepRight = true;
+            this.checkStepUp = true;
+            this.checkStepDown = true;
+            return false;
+        }
+
         if (stepUp !== 1) {
             this.map[this.y][this.x] = this.currMarker;
             this.currMarker = stepUp;
@@ -127,7 +140,19 @@ export default class Ghost {
 
     stepDown() {
         let stepDown = this.map[this.y + 1][this.x];
-        if (stepDown >= 5) return false;
+        if (stepDown == undefined) {
+            this.checkStepDown = false;
+            this.checkStepUp = true;
+            return false;
+        }
+
+        if (stepDown > 5) {
+            this.checkStepLeft = true;
+            this.checkStepRight = true;
+            this.checkStepUp = true;
+            this.checkStepDown = true;
+            return false;
+        }
         if (stepDown !== 1) {
             this.map[this.y][this.x] = this.currMarker;
             this.currMarker = stepDown;
@@ -146,11 +171,23 @@ export default class Ghost {
     }
 
     stepLeft() {
-        let stepleft = this.map[this.y][this.x - 1];
-        if (stepleft >= 5) return false;
-        if (stepleft !== 1) {
+        let stepLeft = this.map[this.y][this.x - 1];
+        if (stepLeft == undefined) {
+            this.checkStepLeft = false;
+            this.checkStepRight = true;
+            return false;
+        }
+
+        if (stepLeft > 5) {
+            this.checkStepLeft = true;
+            this.checkStepRight = true;
+            this.checkStepUp = true;
+            this.checkStepDown = true;
+            return false;
+        }
+        if (stepLeft !== 1) {
             this.map[this.y][this.x] = this.currMarker;
-            this.currMarker = stepleft;
+            this.currMarker = stepLeft;
             this.x = this.x - 1;
             this.map[this.y][this.x] = this.number;
             this.looksDirection = 'left';
@@ -167,7 +204,19 @@ export default class Ghost {
 
     stepRight() {
         let stepRight = this.map[this.y][this.x + 1];
-        if (stepRight >= 5) return false;
+        if (stepRight == undefined) {
+            this.checkStepRight = false;
+            this.checkStepLeft = true;
+            return false;
+        }
+
+        if (stepRight > 5) {
+            this.checkStepLeft = true;
+            this.checkStepRight = true;
+            this.checkStepUp = true;
+            this.checkStepDown = true;
+            return false;
+        }
         if (stepRight !== 1) {
             this.map[this.y][this.x] = this.currMarker;
             this.currMarker = stepRight;
