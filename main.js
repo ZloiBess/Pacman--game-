@@ -34,7 +34,7 @@ const SPEED_GHOST_MS = 300;
     });
     drawField();
     startProcess();
-    // setInterval(() => _TEST_showMap(), 200);
+    setInterval(() => _TEST_showMap(), 200);
 }
 //_______________________________________________/Init//.
 
