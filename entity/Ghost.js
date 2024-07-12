@@ -7,7 +7,6 @@ export default class Ghost {
         this.rangeRadarY = rangeRadarY;
         this.rangeRadarX = rangeRadarX;
         this.looksDirection = null;
-        this.nextMarker = null;
         this.checkStepLeft = true;
         this.checkStepRight = true;
         this.checkStepUp = true;
@@ -256,6 +255,7 @@ export default class Ghost {
         return null;
     }
 
+    //get leftTopCorner
     calculateStartCoordinateRadar() {
         let resY = this.y;
         let resX = this.x;

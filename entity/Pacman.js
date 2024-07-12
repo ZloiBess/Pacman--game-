@@ -63,7 +63,7 @@ export default class Pacman {
             if (this.map[this.y][this.x + 1] == undefined) {
                 this.map[this.y][this.x] = 0;
                 this.x = 0;
-                this.pushCoordinateFoodEaten(this.y, this.x);
+                this.pushCoordinateGettingFood(this.y, this.x);
                 this.map[this.y][this.x] = 3;
                 this.shiftDirection = 'teleportLeft';
                 return true;
@@ -74,7 +74,7 @@ export default class Pacman {
             if (this.map[this.y][this.x - 1] == undefined) {
                 this.map[this.y][this.x] = 0;
                 this.x = this.map[this.y].length - 1;
-                this.pushCoordinateFoodEaten(this.y, this.x);
+                this.pushCoordinateGettingFood(this.y, this.x);
                 this.map[this.y][this.x] = 3;
                 this.shiftDirection = 'teleportRight';
                 return true;
@@ -104,7 +104,8 @@ export default class Pacman {
 
         if (this.shiftDirection.includes('right')) {
             if (this.map[this.y][this.x + 1] !== 1) {
-                this.pushCoordinateFoodEaten(this.y, this.x + 1);
+                if (this.map[this.y][this.x + 1] >= 6) return true;
+                this.pushCoordinateGettingFood(this.y, this.x + 1);
                 this.map[this.y][this.x] = 0;
                 this.map[this.y][this.x + 1] = 3;
                 this.x = this.x + 1;
@@ -114,7 +115,8 @@ export default class Pacman {
 
         if (this.shiftDirection.includes('left')) {
             if (this.map[this.y][this.x - 1] !== 1) {
-                this.pushCoordinateFoodEaten(this.y, this.x - 1);
+                if (this.map[this.y][this.x - 1] >= 6) return true;
+                this.pushCoordinateGettingFood(this.y, this.x - 1);
                 this.map[this.y][this.x] = 0;
                 this.map[this.y][this.x - 1] = 3;
                 this.x = this.x - 1;
@@ -124,7 +126,8 @@ export default class Pacman {
 
         if (this.shiftDirection.includes('up')) {
             if (this.map[this.y - 1][this.x] !== 1) {
-                this.pushCoordinateFoodEaten(this.y - 1, this.x);
+                if (this.map[this.y - 1][this.x] >= 6) return true;
+                this.pushCoordinateGettingFood(this.y - 1, this.x);
                 this.map[this.y][this.x] = 0;
                 this.map[this.y - 1][this.x] = 3;
                 this.y = this.y - 1;
@@ -134,7 +137,8 @@ export default class Pacman {
 
         if (this.shiftDirection.includes('down')) {
             if (this.map[this.y + 1][this.x] !== 1) {
-                this.pushCoordinateFoodEaten(this.y + 1, this.x);
+                if (this.map[this.y + 1][this.x] >= 6) return true;
+                this.pushCoordinateGettingFood(this.y + 1, this.x);
                 this.map[this.y][this.x] = 0;
                 this.map[this.y + 1][this.x] = 3;
                 this.y = this.y + 1;
@@ -144,8 +148,8 @@ export default class Pacman {
         return false;
     }
 
-    pushCoordinateFoodEaten(y, x) {
-        if (this.map[y][x] == 2 || this.map[y][x] > 5) {
+    pushCoordinateGettingFood(y, x) {
+        if (this.map[y][x] == 2) {
             this.countScore = this.countScore + 1;
             this.coordinateFoodEaten.push([y, x]);
         }

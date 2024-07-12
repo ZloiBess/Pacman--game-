@@ -28,10 +28,10 @@ const SPEED_GHOST_MS = 300;
 
 // _______________________________________________________
 {
+    drawField();
     document.addEventListener('keydown', (event) => {
         inputKey = event.key;
     });
-    drawField();
     startProcess();
     setInterval(() => _TEST_showConsoleMap(), 200);
 }
@@ -233,7 +233,6 @@ function checkPacmanCollidedGhost() {
             countLessHearts = countLessHearts - 1;
             let hearts = document.querySelector('.hearts');
             hearts.children[countLessHearts].style.opacity = '0';
-
             applyInitialPositions();
             return true;
         }
@@ -345,12 +344,16 @@ function _TEST_showConsoleMap() {
         arrRow = arrRow.replace(/6/g, '%c6%c');
         arrRow = arrRow.replace(/7/g, '%c7%c');
         arrRow = arrRow.replace(/8/g, '%c8%c');
-        arrRow = arrRow.replace(/8/g, '%c9%c');
+        arrRow = arrRow.replace(/9/g, '%c9%c');
 
         arrRow = `row:${row > 9 ? row : '0' + row} - ` + arrRow;
 
         console.log(arrRow, 'color: red', '');
         arrRow = '';
     }
-    console.log(GHOST7.currMarker);
+    console.log('score: ' + PACMAN_OBJ.countScore);
+    console.log('GHOST6: ' + GHOST6.currMarker);
+    console.log('GHOST7: ' + GHOST7.currMarker);
+    console.log('GHOST8: ' + GHOST8.currMarker);
+    console.log('GHOST9: ' + GHOST9.currMarker);
 }
