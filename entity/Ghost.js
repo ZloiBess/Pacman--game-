@@ -56,6 +56,20 @@ export default class Ghost {
                 if (this.checkStepDown && this.stepDown()) return true;
             }
 
+            if (directionMove.includes('downLeft')) {
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+            }
+
+            if (directionMove.includes('downRight')) {
+                if (this.checkStepDown && this.stepDown()) return true;
+                if (this.checkStepRight && this.stepRight()) return true;
+                if (this.checkStepUp && this.stepUp()) return true;
+                if (this.checkStepLeft && this.stepLeft()) return true;
+            }
+
             if (directionMove.includes('stopLeft')) {
                 if (this.checkStepLeft && this.stepLeft()) return true;
                 if (this.checkStepUp && this.stepUp()) return true;
@@ -81,20 +95,6 @@ export default class Ghost {
                 if (this.checkStepDown && this.stepDown()) return true;
                 if (this.checkStepLeft && this.stepLeft()) return true;
                 if (this.checkStepRight && this.stepRight()) return true;
-                if (this.checkStepUp && this.stepUp()) return true;
-            }
-
-            if (directionMove.includes('downLeft')) {
-                if (this.checkStepDown && this.stepDown()) return true;
-                if (this.checkStepLeft && this.stepLeft()) return true;
-                if (this.checkStepRight && this.stepRight()) return true;
-                if (this.checkStepUp && this.stepUp()) return true;
-            }
-
-            if (directionMove.includes('downRight')) {
-                if (this.checkStepDown && this.stepDown()) return true;
-                if (this.checkStepRight && this.stepRight()) return true;
-                if (this.checkStepLeft && this.stepLeft()) return true;
                 if (this.checkStepUp && this.stepUp()) return true;
             }
         }

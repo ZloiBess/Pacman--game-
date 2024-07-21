@@ -303,9 +303,8 @@ function gameOver() {
             resultElem.classList.add('result-win');
         }
 
-        let temp = setInterval(() => {
+        setTimeout(() => {
             if (inputKey === 'Enter') {
-                clearInterval(temp);
                 inputKey = null;
                 resultElem.innerHTML = '';
                 resultElem.classList = 'result';
@@ -329,7 +328,7 @@ function gameOver() {
                 }
                 startProcess();
             }
-        }, 400);
+        }, 0);
     }
 }
 
